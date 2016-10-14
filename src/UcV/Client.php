@@ -84,8 +84,9 @@ class Client
     }
 
     function ucUnserialize($s) {
+        $htmlon = False;
         $xmlParse = new ParseXml($htmlon);
-        $data = $xmlParse->parse($arr);
+        $data = $xmlParse->parse($s);
         $xmlParse->destruct();
 
         return $data;
@@ -565,7 +566,7 @@ class Client
     }
 
     function ucSmsGetRegcode($mobile, $client_ip = '') {
-        $return = $this->ucApiPost('sms', 'get_regcode', array('mobile'=>$mobile, 'client_ip'=>$client_ip));
+        $return = @$this->ucApiPost('sms', 'get_regcode', array('mobile'=>$mobile, 'client_ip'=>$client_ip));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
