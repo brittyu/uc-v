@@ -185,6 +185,7 @@ class Client
         }
 
         $errno = '';
+        $errstr = '';
         $fp = $this->openSocket($ip, $host, $port, $errno, $errstr, $timeout);
 
         if(!$fp) {
