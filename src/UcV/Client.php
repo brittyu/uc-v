@@ -165,7 +165,6 @@ class Client
         if($post) {
             $out = "POST $path HTTP/1.0\r\n";
             $out .= "Accept: */*\r\n";
-            //$out .= "Referer: $boardurl\r\n";
             $out .= "Accept-Language: zh-cn\r\n";
             $out .= "Content-Type: application/x-www-form-urlencoded\r\n";
             $out .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
@@ -178,7 +177,6 @@ class Client
         } else {
             $out = "GET $path HTTP/1.0\r\n";
             $out .= "Accept: */*\r\n";
-            //$out .= "Referer: $boardurl\r\n";
             $out .= "Accept-Language: zh-cn\r\n";
             $out .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
             $out .= "Host: $host\r\n";
