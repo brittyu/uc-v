@@ -2,8 +2,6 @@
 
 namespace UcV;
 
-use ParseXml;
-
 class Client
 {
     function ucAddslashes($string, $force = 0, $strip = FALSE) {
