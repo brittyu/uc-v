@@ -16,6 +16,10 @@ composer.json
 composer install
 ```
 
+#### Thanks
+
+http://www.comsenz.com/products/ucenter
+
 #### Licence
 
 MIT
