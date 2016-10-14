@@ -51,7 +51,6 @@ class Client
             $sep = '&';
         }
         $postdata = $this->ucApiRequestdata($module, $action, $s);
-        var_dump($postdata);
         return $this->ucFopen2(UC_API.'/index.php', 500000, $postdata, '', TRUE, UC_IP, 20);
     }
 
@@ -187,6 +186,7 @@ class Client
             $out .= "Cookie: $cookie\r\n\r\n";
         }
 
+        $errno = '';
         $fp = $this->openSocket($ip, $host, $port, $errno, $errstr, $timeout);
 
         if(!$fp) {
