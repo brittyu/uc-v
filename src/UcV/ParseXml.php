@@ -8,7 +8,7 @@ class ParseXML {
 	public $document;
 	public $stack;
 	public $data;
-	public $last_opened_tag;
+	public $lastOpenedTag;
 	public $isnormal;
 	public $attrs = array();
 	public $failed = FALSE;
@@ -53,20 +53,20 @@ class ParseXML {
 			}
 		}
 		$this->stack[] = &$this->document;
-		$this->last_opened_tag = $tag;
+		$this->lastOpenedTag = $tag;
 		$this->attrs = $attributes;
 	}
 
 	function data(&$parser, $data) {
-		if($this->last_opened_tag != NULL) {
+		if($this->lastOpenedTag != NULL) {
 			$this->data .= $data;
 		}
 	}
 
 	function close(&$parser, $tag) {
-		if($this->last_opened_tag == $tag) {
+		if($this->lastOpenedTag == $tag) {
 			$this->document = $this->data;
-			$this->last_opened_tag = NULL;
+			$this->lastOpenedTag = NULL;
 		}
 		array_pop($this->stack);
 		if($this->stack) {
@@ -75,5 +75,3 @@ class ParseXML {
 	}
 
 }
-
-?>

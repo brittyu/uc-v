@@ -9,6 +9,6 @@ $mobile = '13267204263';
 
 $client = new Client();
 
-$ret = $client->uc_user_checkmobile($mobile);
+$ret = $client->ucUserCheckmobile($mobile);
 
 var_dump($ret);
