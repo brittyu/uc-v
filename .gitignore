@@ -1,3 +1,4 @@
 /vendor/
 *.swp
 composer.lock
+/test/config.php
