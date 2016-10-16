@@ -237,23 +237,23 @@ class Client
     function ucFeedAdd($icon, $uid, $username, $title_template='', $title_data='', $body_template='', $body_data='', $body_general='', $target_ids='', $images = array()) {
         return $this->ucApiPost('feed', 'add',
             array(  'icon'=>$icon,
-                'appid'=>UC_APPID,
-                'uid'=>$uid,
-                'username'=>$username,
-                'title_template'=>$title_template,
-                'title_data'=>$title_data,
-                'body_template'=>$body_template,
-                'body_data'=>$body_data,
-                'body_general'=>$body_general,
-                'target_ids'=>$target_ids,
-                'image_1'=>$images[0]['url'],
-                'image_1_link'=>$images[0]['link'],
-                'image_2'=>$images[1]['url'],
-                'image_2_link'=>$images[1]['link'],
-                'image_3'=>$images[2]['url'],
-                'image_3_link'=>$images[2]['link'],
-                'image_4'=>$images[3]['url'],
-                'image_4_link'=>$images[3]['link']
+                'appid'          => UC_APPID,
+                'uid'            => $uid,
+                'username'       => $username,
+                'title_template' => $title_template,
+                'title_data'     => $title_data,
+                'body_template'  => $body_template,
+                'body_data'      => $body_data,
+                'body_general'   => $body_general,
+                'target_ids'     => $target_ids,
+                'image_1'        => $images[0]['url'],
+                'image_1_link'   => $images[0]['link'],
+                'image_2'        => $images[1]['url'],
+                'image_2_link'   => $images[1]['link'],
+                'image_3'        => $images[2]['url'],
+                'image_3_link'   => $images[2]['link'],
+                'image_4'        => $images[3]['url'],
+                'image_4_link'   => $images[3]['link']
             )
         );
     }
@@ -276,17 +276,43 @@ class Client
     }
 
     function ucFriendLs($uid, $page = 1, $pagesize = 10, $totalnum = 10, $direction = 0) {
-        $return = $this->ucApiPost('friend', 'ls', array('uid'=>$uid, 'page'=>$page, 'pagesize'=>$pagesize, 'totalnum'=>$totalnum, 'direction'=>$direction));
+        $return = $this->ucApiPost(
+            'friend', 
+            'ls', 
+            array(
+                'uid'       => $uid,
+                'page'      => $page,
+                'pagesize'  => $pagesize,
+                'totalnum'  => $totalnum,
+                'direction' => $direction));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
     function ucUserRegister($username, $password, $email, $questionid = '', $answer = '', $regip = '') {
-        return $this->ucApiPost('user', 'register2', array('username'=>$username, 'password'=>$password, 'email'=>$email, 'questionid'=>$questionid, 'answer'=>$answer, 'regip' => $regip));
+        return $this->ucApiPost(
+            'user', 
+            'register2', 
+            array(
+                'username'   => $username,
+                'password'   => $password,
+                'email'      => $email,
+                'questionid' => $questionid,
+                'answer'     => $answer,
+                'regip'      => $regip));
     }
 
     function ucUserLogin($username, $password, $isuid = 0, $checkques = 0, $questionid = '', $answer = '') {
         $isuid = intval($isuid);
-        $return = $this->ucApiPost('user', 'login', array('username'=>$username, 'password'=>$password, 'isuid'=>$isuid, 'checkques'=>$checkques, 'questionid'=>$questionid, 'answer'=>$answer));
+        $return = $this->ucApiPost(
+            'user', 
+            'login', 
+            array(
+                'username'   => $username,
+                'password'   => $password,
+                'isuid'      => $isuid,
+                'checkques'  => $checkques,
+                'questionid' => $questionid,
+                'answer'     => $answer));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
@@ -314,7 +340,17 @@ class Client
     }
 
     function ucUserEdit($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '') {
-        return $this->ucApiPost('user', 'edit', array('username'=>$username, 'oldpw'=>$oldpw, 'newpw'=>$newpw, 'email'=>$email, 'ignoreoldpw'=>$ignoreoldpw, 'questionid'=>$questionid, 'answer'=>$answer));
+        return $this->ucApiPost(
+            'user', 
+            'edit', 
+            array(
+                'username'    => $username,
+                'oldpw'       => $oldpw,
+                'newpw'       => $newpw,
+                'email'       => $email,
+                'ignoreoldpw' => $ignoreoldpw,
+                'questionid'  => $questionid,
+                'answer'      => $answer));
     }
 
     function ucUserDelete($uid) {
@@ -356,7 +392,15 @@ class Client
     }
 
     function ucUserMerge($oldusername, $newusername, $uid, $password, $email) {
-        return $this->ucApiPost('user', 'merge', array('oldusername'=>$oldusername, 'newusername'=>$newusername, 'uid'=>$uid, 'password'=>$password, 'email'=>$email));
+        return $this->ucApiPost(
+            'user', 
+            'merge', 
+            array(
+                'oldusername' => $oldusername,
+                'newusername' => $newusername,
+                'uid'         => $uid,
+                'password'    => $password,
+                'email'       => $email));
     }
 
     function ucUserMergeRemove($username) {
@@ -383,15 +427,29 @@ class Client
     function ucPmSend($fromuid, $msgto, $subject, $message, $instantly = 1, $replypmid = 0, $isusername = 0, $type = 0) {
         if($instantly) {
             $replypmid = @is_numeric($replypmid) ? $replypmid : 0;
-            return $this->ucApiPost('pm', 'sendpm', array('fromuid'=>$fromuid, 'msgto'=>$msgto, 'subject'=>$subject, 'message'=>$message, 'replypmid'=>$replypmid, 'isusername'=>$isusername, 'type' => $type));
+            return $this->ucApiPost(
+                'pm', 
+                'sendpm', 
+                array(
+                    'fromuid'    => $fromuid,
+                    'msgto'      => $msgto,
+                    'subject'    => $subject,
+                    'message'    => $message,
+                    'replypmid'  => $replypmid,
+                    'isusername' => $isusername,
+                    'type'       => $type));
         } else {
-            $fromuid = intval($fromuid);
-            $subject = rawurlencode($subject);
-            $msgto = rawurlencode($msgto);
-            $message = rawurlencode($message);
+            $fromuid   = intval($fromuid);
+            $subject   = rawurlencode($subject);
+            $msgto     = rawurlencode($msgto);
+            $message   = rawurlencode($message);
             $replypmid = @is_numeric($replypmid) ? $replypmid : 0;
-            $replyadd = $replypmid ? "&pmid=$replypmid&do=reply" : '';
-            $apiurl = ucApiUrl('pm_client', 'send', "uid=$fromuid", "&msgto=$msgto&subject=$subject&message=$message$replyadd");
+            $replyadd  = $replypmid ? "&pmid = $replypmid&do = reply" : '';
+            $apiurl    = ucApiUrl(
+                'pm_client', 
+                'send', 
+                "uid=$fromuid", 
+                "&msgto=$msgto&subject=$subject&message=$message$replyadd");
             @header("Expires: 0");
             @header("Cache-Control: private, post-check=0, pre-check=0, max-age=0", FALSE);
             @header("Pragma: no-cache");
@@ -412,14 +470,29 @@ class Client
     }
 
     function ucPmReadstatus($uid, $uids, $plids = array(), $status = 0) {
-        return $this->ucApiPost('pm', 'readstatus', array('uid'=>$uid, 'uids'=>$uids, 'plids'=>$plids, 'status'=>$status));
+        return $this->ucApiPost(
+            'pm', 
+            'readstatus', 
+            array(
+                'uid'    => $uid,
+                'uids'   => $uids,
+                'plids'  => $plids,
+                'status' => $status));
     }
 
     function ucPmList($uid, $page = 1, $pagesize = 10, $folder = 'inbox', $filter = 'newpm', $msglen = 0) {
-        $uid = intval($uid);
-        $page = intval($page);
+        $uid      = intval($uid);
+        $page     = intval($page);
         $pagesize = intval($pagesize);
-        $return = $this->ucApiPost('pm', 'ls', array('uid'=>$uid, 'page'=>$page, 'pagesize'=>$pagesize, 'filter'=>$filter, 'msglen'=>$msglen));
+        $return   = $this->ucApiPost(
+            'pm', 
+            'ls', 
+            array(
+                'uid'      => $uid,
+                'page'     => $page,
+                'pagesize' => $pagesize,
+                'filter'   => $filter,
+                'msglen'   => $msglen));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
@@ -429,27 +502,50 @@ class Client
     }
 
     function ucPmView($uid, $pmid = 0, $touid = 0, $daterange = 1, $page = 0, $pagesize = 10, $type = 0, $isplid = 0) {
-        $uid = intval($uid);
-        $touid = intval($touid);
-        $page = intval($page);
+        $uid      = intval($uid);
+        $touid    = intval($touid);
+        $page     = intval($page);
         $pagesize = intval($pagesize);
-        $pmid = @is_numeric($pmid) ? $pmid : 0;
-        $return = $this->ucApiPost('pm', 'view', array('uid'=>$uid, 'pmid'=>$pmid, 'touid'=>$touid, 'daterange'=>$daterange, 'page' => $page, 'pagesize' => $pagesize, 'type'=>$type, 'isplid'=>$isplid));
+        $pmid     = @is_numeric($pmid) ? $pmid : 0;
+        $return = $this->ucApiPost(
+            'pm', 
+            'view', 
+            array(
+                'uid'       => $uid,
+                'pmid'      => $pmid,
+                'touid'     => $touid,
+                'daterange' => $daterange,
+                'page'      => $page,
+                'pagesize'  => $pagesize,
+                'type'      => $type,
+                'isplid'    => $isplid));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
     function ucPmViewNum($uid, $touid, $isplid) {
-        $uid = intval($uid);
-        $touid = intval($touid);
+        $uid    = intval($uid);
+        $touid  = intval($touid);
         $isplid = intval($isplid);
-        return $this->ucApiPost('pm', 'viewnum', array('uid' => $uid, 'touid' => $touid, 'isplid' => $isplid));
+        return $this->ucApiPost(
+            'pm', 
+            'viewnum', 
+            array(
+                'uid'    => $uid,
+                'touid'  => $touid,
+                'isplid' => $isplid));
     }
 
     function ucPmViewnode($uid, $type, $pmid) {
         $uid = intval($uid);
         $type = intval($type);
         $pmid = @is_numeric($pmid) ? $pmid : 0;
-        $return = $this->ucApiPost('pm', 'viewnode', array('uid'=>$uid, 'type'=>$type, 'pmid'=>$pmid));
+        $return = $this->ucApiPost(
+            'pm', 
+            'viewnode', 
+            array(
+                'uid'  => $uid,
+                'type' => $type,
+                'pmid' => $pmid));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
@@ -461,8 +557,8 @@ class Client
     }
 
     function ucPmKickchatpm($plid, $uid, $touid) {
-        $uid = intval($uid);
-        $plid = intval($plid);
+        $uid   = intval($uid);
+        $plid  = intval($plid);
         $touid = intval($touid);
         return $this->ucApiPost('pm', 'kickchatpm', array('uid'=>$uid, 'plid'=>$plid, 'touid'=>$touid));
     }
@@ -505,7 +601,15 @@ class Client
         $toappid = intval($toappid);
         $to = intval($to);
         $amount = intval($amount);
-        return $this->ucApiPost('credit', 'request', array('uid'=>$uid, 'from'=>$from, 'to'=>$to, 'toappid'=>$toappid, 'amount'=>$amount));
+        return $this->ucApiPost(
+            'credit', 
+            'request', 
+            array(
+                'uid'     => $uid,
+                'from'    => $from,
+                'to'      => $to,
+                'toappid' => $toappid,
+                'amount'  => $amount));
     }
 
     function ucTagGet($tagname, $nums = 0) {
@@ -546,7 +650,18 @@ class Client
     }
 
     function ucMailQueue($uids, $emails, $subject, $message, $frommail = '', $charset = 'gbk', $htmlon = FALSE, $level = 1) {
-        return $this->ucApiPost('mail', 'add', array('uids' => $uids, 'emails' => $emails, 'subject' => $subject, 'message' => $message, 'frommail' => $frommail, 'charset' => $charset, 'htmlon' => $htmlon, 'level' => $level));
+        return $this->ucApiPost(
+            'mail', 
+            'add', 
+            array(
+                'uids'     => $uids,
+                'emails'   => $emails,
+                'subject'  => $subject,
+                'message'  => $message,
+                'frommail' => $frommail,
+                'charset'  => $charset,
+                'htmlon'   => $htmlon,
+                'level'    => $level));
     }
 
     function ucCheckAvatar($uid, $size = 'middle', $type = 'virtual') {
@@ -566,17 +681,32 @@ class Client
     }
 
     function ucSmsGetRegcode($mobile, $client_ip = '') {
-        $return = @$this->ucApiPost('sms', 'get_regcode', array('mobile'=>$mobile, 'client_ip'=>$client_ip));
+        $return = @$this->ucApiPost(
+            'sms', 
+            'get_regcode', 
+            array(
+                'mobile'=>$mobile, 
+                'client_ip'=>$client_ip));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
     function ucSmsGetEditcode($mobile, $client_ip = '') {
-        $return = $this->ucApiPost('sms', 'get_editcode', array('mobile'=>$mobile, 'client_ip'=>$client_ip));
+        $return = $this->ucApiPost(
+            'sms', 
+            'get_editcode', 
+            array(
+                'mobile'=>$mobile, 
+                'client_ip'=>$client_ip));
         return UC_CONNECT == 'mysql' ? $return : $this->ucUnserialize($return);
     }
 
     function ucSmsCheckCode($mobile, $code) {
-        return $this->ucApiPost('sms', 'check_code', array('mobile'=>$mobile, 'code'=>$code));
+        return $this->ucApiPost(
+            'sms', 
+            'check_code', 
+            array(
+                'mobile'=>$mobile, 
+                'code'=>$code));
     }
 
 }
