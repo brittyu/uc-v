@@ -40,7 +40,7 @@ class ParseXML {
 		$this->data = '';
 		$this->failed = FALSE;
 		if(!$this->isnormal) {
-			if(isset($attributes['id']) && !is_string($this->document[$attributes['id']])) {
+            if (isset($attributes['id'])) {
 				$this->document  = &$this->document[$attributes['id']];
 			} else {
 				$this->failed = TRUE;
